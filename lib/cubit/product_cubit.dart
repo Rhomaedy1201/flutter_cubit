@@ -7,10 +7,8 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductInitial());
 
   void getProduct() async {
-    print("object");
     emit(ProductLoading());
-    final response = await http.get(Uri.parse("https://api.escuelajs.co/api/v1/products"));
-    print(response.body);
+    final response = await http.get(Uri.parse("https://fakestoreapi.com/products"));
     emit(ProductSuccess(product: productFromJson(response.body)));
   }
 }

@@ -22,18 +22,23 @@ class HomePage extends StatelessWidget {
           if(state is ProductSuccess) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: GridView.builder(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                  childAspectRatio: 0.8,
-                ), 
-                itemBuilder: (context, index) {
-                  return WidgetItems(product: state.product[index]);
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  context.read<ProductCubit>().getProduct();
                 },
-                itemCount: 10,
+                child: GridView.builder(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 0.8,
+                  ), 
+                  itemBuilder: (context, index) {
+                    return WidgetItems(product: state.product[index]);
+                  },
+                  itemCount: state.product.length,
+                ),
               ),
             );
           }
