@@ -7,6 +7,7 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductInitial());
 
   void getProduct() async {
+    print("object");
     emit(ProductLoading());
     final response = await http.get(Uri.parse("https://api.escuelajs.co/api/v1/products"));
     print(response.body);
