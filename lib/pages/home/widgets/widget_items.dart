@@ -33,11 +33,10 @@ class WidgetItems extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFCFCFCF),
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       image: NetworkImage(product.image),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     )
                   ),
                   
