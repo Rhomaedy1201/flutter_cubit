@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cubit/cubit/product_cubit.dart';
 import 'package:flutter_cubit/pages/home/widgets/widget_items.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('${dotenv.env['HOST']}'),
+        title: Text('Home Page'),
         backgroundColor: Colors.lightBlue,
       ),
       body: BlocBuilder<ProductCubit, ProductState>(
