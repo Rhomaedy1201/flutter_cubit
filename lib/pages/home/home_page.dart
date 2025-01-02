@@ -15,30 +15,30 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
         backgroundColor: Colors.lightBlue,
       ),
-      body: BlocBuilder<ProductCubit, ProductState>(
-        builder: (context, state) {
-          if (state is ProductLoading) {
-            return Center(child: CircularProgressIndicator());
-          } 
-          if(state is ProductSuccess) {
-            return Column(
-              children: [
-                Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF4F4F4),
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 10,
-                        color: const Color(0xFFC3C3C3),
-                        offset: Offset(0, 1)
-                      )
-                    ]
-                  ),
-                  child: WidgetCategorys(),
-                ),
-                Expanded(
-                  child: RefreshIndicator(
+      body: Column(
+        children: [
+          Container(
+            height: 70,
+            decoration: BoxDecoration(
+              color: const Color(0xFFF4F4F4),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: const Color(0xFFC3C3C3),
+                  offset: Offset(0, 1)
+                )
+              ]
+            ),
+            child: WidgetCategorys(),
+          ),
+          Expanded(
+            child: BlocBuilder<ProductCubit, ProductState>(
+              builder: (context, state) {
+                if (state is ProductLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } 
+                if(state is ProductSuccess) {
+                  return RefreshIndicator(
                     onRefresh: () async {
                       context.read<ProductCubit>().getProduct();
                     },
@@ -59,13 +59,13 @@ class HomePage extends StatelessWidget {
                         itemCount: state.product.length,
                       ),
                     ),
-                  ),
-                ),
-              ],
-            );
-          }
-          return Center(child: Text("No Data"));
-        },
+                  );
+                }
+                return Center(child: Text("No Data"));
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

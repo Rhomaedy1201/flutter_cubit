@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/cubit/category_product_cubit.dart';
 import 'package:flutter_cubit/cubit/product_cubit.dart';
 import 'package:flutter_cubit/pages/home/home_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,8 +16,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductCubit()..getProduct(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductCubit>(create: (context) => ProductCubit()..getProduct()),
+        BlocProvider<CategoryProductCubit>(create: (context) => CategoryProductCubit()..getCategories()),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
